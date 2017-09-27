@@ -1,3 +1,4 @@
+This is a fork of the original [Native Starter Kit](https://github.com/start-react/native-starter-kit). It uses [Typescript](https://www.typescriptlang.org/index.html) for everything and was massively refactored to improve the overall structure and fix a lot of bugs. It also uses [Redux-Saga](https://github.com/redux-saga/redux-saga) and [Redux-Saga-Routines](https://github.com/afitiskin/redux-saga-routines) for easier handling of asynchronous actions. Jest was replaced by [mocha](https://mochajs.org/) + [enzyme](https://github.com/airbnb/enzyme), because it is a LOT faster. It also uses [prettier](https://github.com/sheerun/prettier-standard) to automatically format your typescript files.
 
 ## Native Starter Kit v6.1.0
 
@@ -86,17 +87,9 @@ The CodePush plugin helps get product improvements in front of your end users in
 
 
 
-### [React Native Easy Grid](https://github.com/GeekyAnts/react-native-easy-grid)
+### [React Native Responsive Grid]()
 
-React Native Easy Grid is an open source package for grid layout from the team of [NativeBase](https://nativebase.io/).
-
-The layout system is an essential concept that needs to be mastered in order to create great layouts and UIs. [React Native](https://github.com/facebook/react-native) uses Flexbox to create the layouts, which is great when we need to accommodate our components and views in different screen sizes or even different devices. Flexbox is awesome but it could be tiresome for newbies.
-
-Easy Grid is very powerful and flexible layout system. No more worries about props of Flexbox such as alignItems, flexDirection, justifyContent, margin, padding, position, width etc. You can create any layout with all the available options that we have. Flexbox makes it look like percentages, however what actually is happening is just ratios. On the easier part, ratios are easier to represent than percentage/decimals. For this reason, the Easy Grid takes in ratios in place of percentage.
-Performance wise, Easy Grid is noteworthy and works as fine as Flexbox, not much of calculation.
-
-[More Examples](https://docs.nativebase.io/Components.html#Layout) . . .
-
+For easier creation of grid layouts (see docs).
 
 ### [React Native-NativeBase Seed](https://github.com/GeekyAnts/react-native-native-base-seed)
 

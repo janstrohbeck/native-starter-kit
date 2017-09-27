@@ -1,0 +1,2 @@
+--compilers ts:tests/compiler.js,tsx:tests/compiler.js
+--require tests/setup.js

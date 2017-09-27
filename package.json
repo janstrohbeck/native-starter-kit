@@ -4,45 +4,103 @@
   "private": true,
   "scripts": {
     "postinstall": "remotedev-debugger",
-    "start": "node_modules/react-native/packager/packager.sh",
-    "eslint": "eslint",
-    "test": "jest"
+    "start": "react-native start",
+    "lint": "tslint --project .",
+    "test": "mocha --opts mocha.opts tests/**/*.tsx",
+    "test:watch": "mocha --opts mocha.opts --watch tests/**/*.tsx",
+    "coverage": "nyc npm run test:only",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "prebuild": "rimraf build",
+    "format": "prettier-standard 'src/**/*.ts' 'src/**/*.tsx' && tslint --project . --fix",
+    "build": "tsc",
+    "watch": "npm run build -- -w",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "prettier-standard",
+      "tslint",
+      "git add"
+    ],
+    "src/**/*.tsx": [
+      "prettier-standard",
+      "tslint",
+      "git add"
+    ],
+    "tests/**/*.ts": [
+      "prettier-standard",
+      "tslint",
+      "git add"
+    ],
+    "tests/**/*.tsx": [
+      "prettier-standard",
+      "tslint",
+      "git add"
+    ]
   },
   "dependencies": {
     "color": "^0.11.3",
     "lodash": "^4.13.1",
     "moment": "^2.13.0",
-    "native-base": "2.1.4",
-    "react": "16.0.0-alpha.12",
-    "react-native": "0.45.1",
-    "react-native-code-push": "2.0.1-beta",
-    "react-native-easy-grid": "0.1.8",
+    "native-base": "^2.3.2",
+    "prop-types": "^15.6.0",
+    "react": "16.0.0",
+    "react-native": "^0.48.3",
+    "react-native-code-push": "^5.1.1-beta",
     "react-native-modalbox": "^1.3.4",
-    "react-navigation": "1.0.0-beta.11",
+    "react-native-responsive-grid": "^0.32.4",
+    "react-native-vector-icons": "^4.4.0",
+    "react-navigation": "1.0.0-beta.13",
     "react-redux": "^5.0.2",
+    "react-redux-typescript": "^2.3.0",
     "redux": "^3.6.0",
-    "redux-form": "^6.7.0",
-    "redux-persist": "^4.0.0",
-    "redux-thunk": "^2.2.0",
+    "redux-form": "7.0.4",
+    "redux-persist": "^4.10.1",
+    "redux-saga": "^0.15.6",
+    "redux-saga-routines": "^2.0.2",
     "remote-redux-devtools": "^0.5.0"
   },
   "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/chai-enzyme": "^0.6.3",
+    "@types/cheerio": "^0.22.2",
+    "@types/color": "^2.0.0",
+    "@types/enzyme": "^2.8.8",
+    "@types/mocha": "^2.2.43",
+    "@types/react-native": "^0.48.6",
+    "@types/react-native-modalbox": "^1.4.2",
+    "@types/react-navigation": "^1.0.20",
+    "@types/react-redux": "^5.0.9",
+    "@types/redux-actions": "^2.2.2",
+    "@types/redux-form": "7.0.4",
+    "@types/remote-redux-devtools": "^0.5.1",
+    "@types/sinon-chai": "^2.7.29",
     "babel-eslint": "^6.1.2",
-    "babel-jest": "17.0.0",
-    "babel-preset-react-native": "1.9.0",
-    "chai": "^3.5.0",
-    "eslint": "^3.5.0",
-    "eslint-config-airbnb": "^11.1.0",
-    "eslint-plugin-import": "^1.14.0",
-    "eslint-plugin-jsx-a11y": "^2.2.1",
-    "eslint-plugin-react": "^6.2.0",
-    "eslint-plugin-react-native": "^2.0.0",
-    "jest": "17.0.0",
-    "jest-react-native": "17.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react-native": "^4.0.0",
+    "chai": "^4.1.2",
+    "chai-enzyme": "1.0.0-beta.0",
+    "create-react-class": "^15.6.0",
+    "enzyme": "^3.0.0",
+    "enzyme-adapter-react-16": "^1.0.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.2.3",
     "mocha": "^2.5.3",
-    "react-test-renderer": "15.3.2",
-    "remote-redux-devtools-on-debugger": "^0.7.0",
-    "remotedev-server": "^0.1.2"
+    "nyc": "^11.2.1",
+    "prettier-standard": "^7.0.1",
+    "react-dom": "16.0.0",
+    "react-test-renderer": "^16.0.0",
+    "remotedev-rn-debugger": "^0.8.2",
+    "remotedev-server": "^0.1.2",
+    "rimraf": "^2.6.2",
+    "sinon": "^4.0.1",
+    "sinon-chai": "^2.14.0",
+    "tslint": "^5.7.0",
+    "tslint-config-prettier": "^1.5.0",
+    "tslint-config-standard": "^6.0.1",
+    "tslint-react": "^3.2.0",
+    "typescript": "^2.5.3"
   },
   "keywords": [
     "android",
@@ -66,7 +124,21 @@
     "react-native with native-base"
   ],
   "upstreamRepo": "git@github.com:GeekyAnts/react-native-native-base-seed.git",
-  "jest": {
-    "preset": "jest-react-native"
+  "nyc": {
+    "include": [
+      "src/**/*.ts",
+      "src/**/*.tsx"
+    ],
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "extension": [
+      ".tsx",
+      ".ts"
+    ],
+    "cache": true,
+    "all": true,
+    "report-dir": "./coverage"
   }
 }
